@@ -20,10 +20,7 @@
     .panel { border:1px solid #313a55; background:#11182a; border-radius:24px; padding:24px; margin:24px 0; }
     .count { color:var(--gold); font-size:clamp(3rem,15vw,5rem); line-height:1; font-weight:800; font-variant-numeric:tabular-nums; }
     .count-label { color:var(--muted); margin-top:10px; }
-    button,.share {
-      display:inline-block; border:0; border-radius:999px; padding:14px 22px;
-      font-size:1rem; font-weight:750; text-decoration:none; cursor:pointer;
-    }
+    button,.share { display:inline-block; border:0; border-radius:999px; padding:14px 22px; font-size:1rem; font-weight:750; text-decoration:none; cursor:pointer; }
     button { color:#111522; background:var(--gold); margin-top:18px; width:100%; }
     button:disabled { opacity:.6; cursor:wait; }
     .share { color:#f7f8fc; border:1px solid #46506c; margin-top:10px; }
@@ -57,10 +54,25 @@
     anonymous app accounts, not verified individual people, and may be affected
     by duplicate or abusive registrations.
   </p>
+
+  <section class="panel" id="privacy-policy" style="text-align:left">
+    <h2 style="color:var(--gold);text-align:center">Privacy Policy</h2>
+    <p>THE ONE DOLLAR MYSTERY is a free community experiment. This policy explains what information this website handles.</p>
+    <h3>Information we collect</h3>
+    <p>When you choose to join, Firebase Authentication creates an anonymous account identifier. The website stores that identifier in order to prevent the same anonymous account from registering more than once, along with a server-generated registration timestamp (<code>joinedAt</code>). The website does not ask you for your name, email address, phone number, or payment details.</p>
+    <h3>How information is used</h3>
+    <p>The anonymous identifier and timestamp are used to record participation and display the total number of registrations. The participant counter may include duplicate or abusive registrations and does not verify individual people.</p>
+    <h3>Service providers</h3>
+    <p>This website uses Google Firebase Authentication and Cloud Firestore to provide anonymous sign-in and store registration records. Those services process data as needed to operate the website and are subject to Google's applicable terms and privacy information.</p>
+    <h3>Sharing and payments</h3>
+    <p>This website does not intentionally ask for personal contact details and does not accept payments in this version. Do not submit personal or sensitive information through this experiment.</p>
+    <h3>Data and contact</h3>
+    <p>Registration records may remain in the database while the experiment operates. This page currently does not provide a dedicated contact address or an automated way to request deletion. Do not join if you are not comfortable with this arrangement.</p>
+    <p class="fine">Last updated: October 2026.</p>
+  </section>
 </main>
 
 <script type="module">
-  // Replace the placeholder values below with your Firebase web-app config.
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
   import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
   import {
@@ -102,7 +114,7 @@
           text: "Join this free global experiment and invite three people.",
           url: location.href
         });
-      } catch (_) { /* user may cancel sharing */ }
+      } catch (_) {}
     });
   }
 
