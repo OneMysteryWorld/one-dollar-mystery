@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b16">
+  <title>THE ONE DOLLAR MYSTERY</title>
+  <style>
+    :root { color-scheme: dark; --gold:#f5c96a; --muted:#b8bfd0; }
+    * { box-sizing: border-box; }
+    body {
+      margin:0; min-height:100vh; display:grid; place-items:center;
+      padding:24px; font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+      color:#f7f8fc; background:radial-gradient(ellipse at top,#172344 0,#080b16 58%);
+    }
+    main { width:min(100%,680px); text-align:center; }
+    .eyebrow { color:var(--gold); letter-spacing:.22em; font-size:.76rem; font-weight:700; }
+    h1 { font-size:clamp(2rem,8vw,4rem); line-height:1.02; margin:18px 0; letter-spacing:-.04em; }
+    .intro { color:var(--muted); line-height:1.7; max-width:540px; margin:0 auto 24px; }
+    .panel { border:1px solid #313a55; background:#11182a; border-radius:24px; padding:24px; margin:24px 0; }
+    .count { color:var(--gold); font-size:clamp(3rem,15vw,5rem); line-height:1; font-weight:800; font-variant-numeric:tabular-nums; }
+    .count-label { color:var(--muted); margin-top:10px; }
+    button,.share {
+      display:inline-block; border:0; border-radius:999px; padding:14px 22px;
+      font-size:1rem; font-weight:750; text-decoration:none; cursor:pointer;
+    }
+    button { color:#111522; background:var(--gold); margin-top:18px; width:100%; }
+    button:disabled { opacity:.6; cursor:wait; }
+    .share { color:#f7f8fc; border:1px solid #46506c; margin-top:10px; }
+    .status { min-height:1.5em; color:var(--muted); font-size:.93rem; margin-top:14px; }
+    .fine { color:#9da7bd; font-size:.8rem; line-height:1.6; margin-top:24px; }
+    .pill { display:inline-block; border:1px solid #35415d; border-radius:999px; padding:7px 12px; color:#cbd3e6; font-size:.8rem; }
+    a { color:var(--gold); }
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">A GLOBAL COMMUNITY EXPERIMENT</div>
+  <h1>THE ONE<br> DOLLAR MYSTERY</h1>
+  <p class="intro">
+    Can one small idea travel around the world? Join this free experiment,
+    leave your mark, and invite others to take part.
+  </p>
+
+  <div class="panel">
+    <div class="pill">FREE TO JOIN · NO PAYMENT REQUIRED</div>
+    <p class="count" id="count">—</p>
+    <div class="count-label">participants registered</div>
+    <button id="joinBtn">JOIN THE EXPERIMENT</button>
+    <div class="status" id="status" role="status" aria-live="polite">Connecting to the live counter…</div>
+    <a class="share" id="shareBtn" href="#">SHARE WITH 3 PEOPLE</a>
+  </div>
+
+  <p class="fine">
+    Participation is free. This is a community experiment, not an investment.
+    Optional support is not enabled on this first version. The counter records
+    anonymous app accounts, not verified individual people, and may be affected
+    by duplicate or abusive registrations.
+  </p>
+</main>
+
+<script type="module">
+  // Replace the placeholder values below with your Firebase web-app config.
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+  import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+  import {
+    getFirestore, doc, getDoc, setDoc, serverTimestamp,
+    collection, getCountFromServer
+  } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB2HA4ajBflYsWxIV-8zpyYtX_5AgXKNsk",
+    authDomain: "one-dollar-mystery.firebaseapp.com",
+    projectId: "one-dollar-mystery",
+    storageBucket: "one-dollar-mystery.firebasestorage.app",
+    messagingSenderId: "609635738492",
+    appId: "1:609635738492:web:c6691f648cf1660ca1faf9",
+    measurementId: "G-4FJTDZ9MY2"
+  };
+
+  const countEl = document.getElementById("count");
+  const statusEl = document.getElementById("status");
+  const joinBtn = document.getElementById("joinBtn");
+  const shareBtn = document.getElementById("shareBtn");
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  async function refreshCount() {
+    const result = await getCountFromServer(collection(db, "participants"));
+    countEl.textContent = result.data().count.toLocaleString();
+  }
+
+  shareBtn.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(location.href);
+  if (navigator.share) {
+    shareBtn.addEventListener("click", async (event) => {
+      event.preventDefault();
+      try {
+        await navigator.share({
+          title: "THE ONE DOLLAR MYSTERY",
+          text: "Join this free global experiment and invite three people.",
+          url: location.href
+        });
+      } catch (_) { /* user may cancel sharing */ }
+    });
+  }
+
+  joinBtn.addEventListener("click", async () => {
+    joinBtn.disabled = true;
+    statusEl.textContent = "Registering your participation…";
+    try {
+      const credential = await signInAnonymously(auth);
+      const participantRef = doc(db, "participants", credential.user.uid);
+      const existing = await getDoc(participantRef);
+
+      if (existing.exists()) {
+        statusEl.textContent = "You're already registered on this browser. Thanks for joining!";
+      } else {
+        await setDoc(participantRef, { joinedAt: serverTimestamp() });
+        statusEl.textContent = "You're in! Thanks for joining the experiment. Share it with three people.";
+      }
+      await refreshCount();
+    } catch (error) {
+      console.error(error);
+      statusEl.textContent = "The counter is not connected yet. Check the Firebase setup and try again.";
+    } finally {
+      joinBtn.disabled = false;
+    }
+  });
+
+  refreshCount().catch((error) => {
+    console.error(error);
+    countEl.textContent = "—";
+    statusEl.textContent = "Setup needed: connect this page to Firebase first.";
+  });
+</script>
+</body>
+</html>
