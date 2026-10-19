@@ -164,7 +164,7 @@ import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/1
 import { getFirestore, collection, doc, getDoc, setDoc, serverTimestamp, getCountFromServer } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB2HA4jBflYsWxIV-8zpyYtX_5AgXKNsk",
+  apiKey: "AIzaSyB2HA4ajBflYsWxIV-8zpyYtX_5AgXKNsk",
   authDomain: "one-dollar-mystery.firebaseapp.com",
   projectId: "one-dollar-mystery",
   storageBucket: "one-dollar-mystery.firebasestorage.app",
@@ -214,7 +214,7 @@ async function start(){
   const cred=await signInAnonymously(auth); const ref=doc(db,'participants',cred.user.uid); const existing=await getDoc(ref);
   if(existing.exists()){ showMembership(existing.data()); }
   await refreshCount();
- } catch(err){ console.error('Firebase initialization/auth error:',err); showStatus('Connection error. Check Firebase Authentication and authorized domains.'); }
+ } catch(err){ console.error('Firebase initialization/auth error:',err); showStatus(`Connection error [${err.code || err.message || 'unknown error'}]. Check Firebase settings.`); }
 }
 $('joinBtn').addEventListener('click', async()=>{
  const btn=$('joinBtn'); btn.disabled=true; showStatus(t('loading'));
