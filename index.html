@@ -3,217 +3,192 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#081326">
+<meta name="theme-color" content="#050b18">
 <title>THE ONE DOLLAR MYSTERY</title>
 <style>
-:root{color-scheme:dark;--navy:#081326;--blue:#2588ff;--light:#54b5ff;--muted:#c2cee2}
+:root{color-scheme:dark;--navy:#050b18;--blue:#438cff;--light:#7bd4ff;--muted:#b8c7df}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:Arial,sans-serif;background:var(--navy);color:#f5f8ff}
-.hero{padding:0 20px 52px;background:radial-gradient(ellipse at 80% 45%,#355c8c,transparent 38%),linear-gradient(#101f3b,#081326)}
-.topbar{max-width:1100px;margin:auto;min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #ffffff2b}
-.brand{color:white;text-decoration:none;font-weight:850}
-.brand b{color:var(--light)}
-nav{display:flex;gap:12px;flex-wrap:wrap}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--navy);color:#f4f8ff;letter-spacing:.005em}
+.hero{position:relative;isolation:isolate;overflow:hidden;padding:0 20px 70px;background:radial-gradient(ellipse at 50% 36%,rgba(30,105,210,.22),transparent 38%),radial-gradient(ellipse at 85% 18%,rgba(68,139,255,.18),transparent 28%),linear-gradient(145deg,#071329,#050b18 58%,#0b1830)}
+.hero:before,.hero:after{content:"";position:absolute;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(1px)}
+.hero:before{width:360px;height:360px;right:-170px;top:190px;border:1px solid rgba(93,174,255,.2);box-shadow:0 0 70px #3082ff1f,inset 0 0 55px #3082ff14}
+.hero:after{width:240px;height:240px;left:-130px;top:430px;border:1px solid #5daeff29;box-shadow:0 0 60px #3082ff1a}
+.topbar{max-width:1100px;margin:auto;min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #a4c7ff29}
+.brand{color:white;text-decoration:none;font-weight:850;letter-spacing:.07em;font-size:.9rem}
+.brand b{color:#8bdcff;text-shadow:0 0 22px #58b5ff59}
+nav{display:flex;gap:18px}
 nav a{color:#d8e4f8;text-decoration:none;font-size:.9rem}
-#languageSelect{background:#10213d;color:white;border:1px solid #ffffff45;border-radius:9px;padding:8px}
-.hero-content{text-align:center;max-width:820px;margin:auto;padding-top:55px}
-.eyebrow{color:var(--light);font-size:.75rem;font-weight:800;letter-spacing:.15em}
-h1{font-size:clamp(2.4rem,8vw,5.3rem);line-height:1;margin:18px 0}
-h1 span{display:block;color:var(--light);margin-top:8px}
-.subtitle{color:var(--muted);line-height:1.7}
-.counter-card{max-width:460px;margin:28px auto 0;padding:24px 22px 20px;border:1px solid #c6ddff45;border-radius:24px;background:#081326c9}
-.count{font-size:4rem;font-weight:900;line-height:1;margin:14px 0}
-.live{font-size:.88rem;color:#d3e0f5}
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#24d18b;margin-right:6px}
-button,.share{width:100%;min-height:52px;border-radius:999px;padding:14px 22px;font:inherit;font-weight:800;cursor:pointer;text-decoration:none;display:flex;justify-content:center;align-items:center}
-button{margin-top:20px;border:0;color:white;background:linear-gradient(100deg,#2497ff,#216bf0)}
-button:disabled{opacity:.6}
-.share{margin-top:10px;color:#e9f2ff;background:#ffffff0a;border:1px solid #ffffff30}
-.status{min-height:1.5em;margin-top:12px;color:var(--muted);font-size:.9rem;line-height:1.5}
-.hero-note{color:#cbd8eb;font-size:.9rem;margin-top:18px}
-.features{background:#f7f9fd;color:#142642;padding:42px 20px}
-.feature-grid{max-width:1050px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.feature{text-align:center;padding:10px}
-.feature-icon{display:grid;place-items:center;width:56px;height:56px;border-radius:18px;margin:auto;background:#e3efff;color:#1875ed;font-size:1.5rem}
-.feature p{color:#5b6d87;line-height:1.7;font-size:.93rem}
-.details{background:#edf3fb;color:#1b2d49;padding:38px 20px}
+nav a:hover{color:#8bdcff}
+.nav-right{display:flex;align-items:center;gap:10px}
+#languageSelect{background:#0b1c37;color:#f5f8ff;border:1px solid #96c2ff47;border-radius:12px;padding:9px 12px;font:inherit}
+.hero-content{text-align:center;max-width:820px;margin:auto;padding-top:74px;position:relative}
+.eyebrow{display:inline-flex;color:#7bd4ff;border:1px solid #6ebcff4d;border-radius:999px;padding:9px 14px;background:#194e8f29;letter-spacing:.17em;font-size:.68rem;font-weight:800}
+h1{font-size:clamp(2.45rem,8vw,5.8rem);line-height:1;margin:24px 0 20px;letter-spacing:-.065em;text-shadow:0 8px 40px #0005}
+h1 span{display:block;margin-top:8px;background:linear-gradient(95deg,#8bdcff 5%,#4b91ff 55%,#b5c8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{max-width:620px;margin:0 auto;color:#c3d2e9;line-height:1.85;font-size:clamp(1rem,2.5vw,1.2rem)}
+.counter-card{position:relative;overflow:hidden;max-width:460px;margin:34px auto 0;padding:30px 26px 24px;border:1px solid #87beff4d;border-radius:28px;background:linear-gradient(145deg,#102546f0,#050f1ff7);box-shadow:0 24px 80px #0005,0 0 50px #2274e217;backdrop-filter:blur(14px)}
+.counter-card:before{content:"";position:absolute;top:0;left:18%;right:18%;height:1px;background:linear-gradient(90deg,transparent,#8bdcff,transparent)}
+.counter-label{color:#c9ddf8;letter-spacing:.04em;font-size:.9rem;font-weight:750}
+.count{font-size:clamp(3.8rem,15vw,5.4rem);font-weight:900;line-height:1;margin:14px 0;color:white;text-shadow:0 0 32px #53a3ff3d;font-variant-numeric:tabular-nums}
+.live{font-size:.88rem;color:#b9cce6}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#24d18b;margin-right:6px;box-shadow:0 0 12px #24d18bb3}
+button,.share{width:100%;min-height:52px;border-radius:999px;padding:14px 22px;font:inherit;font-weight:800;cursor:pointer;text-decoration:none;display:flex;justify-content:center;align-items:center;gap:8px}
+button{margin-top:20px;border:0;color:white;background:linear-gradient(105deg,#2f8cff,#3867f4);box-shadow:0 10px 30px #2a77ff3b;transition:transform .18s,box-shadow .18s}
+button:hover{transform:translateY(-1px);box-shadow:0 14px 34px #2a77ff52}
+button:disabled{opacity:.6;cursor:wait}
+.share{margin-top:10px;color:#dceaff;background:#ffffff08;border:1px solid #aaccff33;font-size:.92rem}
+.status{min-height:1.5em;margin-top:12px;color:#b8cbe7;font-size:.9rem;line-height:1.5}
+.hero-note{color:#aebfda;font-size:.9rem;margin-top:18px}
+.features{background:linear-gradient(180deg,#081326,#07101f);color:#f1f6ff;border-top:1px solid #87beff21;border-bottom:1px solid #87beff21;padding:58px 20px}
+.feature-grid{max-width:1050px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.feature{text-align:left;padding:23px 20px;border:1px solid #87beff29;border-radius:20px;background:linear-gradient(145deg,#142746b8,#081325cc);box-shadow:0 16px 34px #0002;transition:transform .2s,border-color .2s}
+.feature:hover{transform:translateY(-3px);border-color:#70beff6b}
+.feature-icon{display:grid;place-items:center;width:56px;height:56px;border-radius:16px;margin:0 0 17px;background:#388bff1f;border:1px solid #68b4ff38;color:#8bdcff;font-size:1.5rem}
+.feature h2{color:#f3f7ff;font-size:1.03rem}
+.feature p{color:#aebfda;line-height:1.75;font-size:.93rem}
+.details{background:#050b18;color:#f1f6ff;padding:55px 20px}
 .details-inner{max-width:850px;margin:auto}
-.details p,.details li{color:#4e607a;line-height:1.75}
-details{margin-top:20px;padding:16px 18px;border:1px solid #d2deef;border-radius:14px;background:white}
-summary{cursor:pointer;font-weight:800}
-footer{background:#071123;padding:28px 20px;color:#bdcbe0}
-@media(max-width:650px){.topbar{align-items:flex-start;padding:14px 0;flex-wrap:wrap}.feature-grid{grid-template-columns:repeat(2,1fr)}.hero-content{padding-top:35px}}
+.details h2{color:#eef5ff;letter-spacing:-.025em;margin-top:28px}
+.details p,.details li{color:#aebfda;line-height:1.75}
+details{margin-top:22px;padding:18px 20px;border:1px solid #87beff33;border-radius:16px;background:linear-gradient(145deg,#0d1b31,#081222);color:#eaf2ff}
+summary{cursor:pointer;color:#8bdcff;letter-spacing:.04em;font-weight:800}
+details h3{color:#e6efff;font-size:1rem}
+footer{background:#030813;border-top:1px solid #87beff21;padding:28px 20px;color:#bdcbe0}
+.footer-inner{max-width:1050px;margin:auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.copyright{text-align:center;border-top:1px solid #87beff24;margin:22px auto 0;padding-top:16px;font-size:.8rem;color:#91a2bd}
+.fine{font-size:.82rem;line-height:1.7;color:#8fa2c0}
+button:focus-visible,.share:focus-visible,a:focus-visible,#languageSelect:focus-visible{outline:2px solid #8bdcff;outline-offset:3px}
+@media(max-width:650px){
+.hero{padding-left:16px;padding-right:16px}
+.topbar{align-items:flex-start;padding:17px 0;gap:14px;flex-wrap:wrap}
+.brand{font-size:.78rem}
+.nav-right{width:100%;justify-content:space-between;gap:8px}
+nav{gap:13px}
+nav a{font-size:.78rem}
+nav a:nth-child(2),nav a:nth-child(3){display:none}
+#languageSelect{max-width:145px;padding:8px 10px}
+.hero-content{padding-top:48px}
+.eyebrow{font-size:.61rem;letter-spacing:.12em}
+.counter-card{padding:25px 18px 20px;border-radius:22px}
+.features{padding:34px 16px}
+.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.feature{padding:17px 14px}
+.feature h2{font-size:.95rem}
+.feature p{font-size:.85rem}
+.details{padding:35px 18px}
+.footer-inner{gap:14px}
+}
+@media(max-width:380px){.feature-grid{grid-template-columns:1fr}.nav-right{align-items:flex-start}.hero-content{padding-top:38px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
 [dir="rtl"] body{text-align:right}
+[dir="rtl"] .topbar,[dir="rtl"] .footer-inner{direction:rtl}
 </style>
 </head>
 <body>
 <section class="hero" id="home">
 <header class="topbar">
-<a class="brand" href="#home">◆ THE <b>ONE DOLLAR</b> MYSTERY</a>
+<a class="brand" href="#home">THE ONE <b>DOLLAR</b> MYSTERY</a>
 <nav>
 <a href="#home" data-t="home">Home</a>
 <a href="#about" data-t="aboutNav">About</a>
 <a href="#rules" data-t="rulesNav">Rules</a>
-<a href="#privacy-policy" data-t="privacyNav">Privacy</a>
-<select id="languageSelect" aria-label="Choose language">
-<option value="en">English</option>
-<option value="fa">فارسی</option>
-<option value="ar">العربية</option>
-<option value="ja">日本語</option>
-<option value="fr">Français</option>
-<option value="it">Italiano</option>
-</select>
+<a href="#privacy" data-t="privacyNav">Privacy</a>
 </nav>
-</header>
-<main class="hero-content">
-<div class="eyebrow" data-t="eyebrow">A GLOBAL COMMUNITY EXPERIMENT</div>
-<h1>THE ONE DOLLAR <span>MYSTERY</span></h1>
-<p class="subtitle" data-t="subtitle">A simple challenge. A global community.<br>One small idea can travel around the world.</p>
-<div class="counter-card">
-<div data-t="total">◉ Total Participants</div>
-<p class="count" id="count">—</p>
-<div class="live"><span class="dot"></span><span data-t="live">Live counter</span></div>
-<button id="joinBtn" type="button" data-t="join">JOIN THE EXPERIMENT ›</button>
-<div class="status" id="status" role="status">Connecting to the live counter…</div>
-<a class="share" id="shareBtn" href="#">SHARE WITH 3 PEOPLE ↗</a>
+<div class="nav-right">
+<select id="languageSelect" aria-label="Select language">
+<option value="en">🇬🇧 English</option>
+<option value="fa">🇮🇷 فارسی</option>
+<option value="ar">🇸🇦 العربية</option>
+<option value="ja">🇯🇵 日本語</option>
+<option value="fr">🇫🇷 Français</option>
+<option value="it">🇮🇹 Italiano</option>
+</select>
 </div>
+</header>
+<div class="hero-content">
+<div class="eyebrow" data-t="eyebrow">A GLOBAL COMMUNITY EXPERIMENT</div>
+<h1>THE ONE <span>DOLLAR MYSTERY</span></h1>
+<p class="subtitle" data-t="subtitle">A simple challenge. A global community.<br>A small idea can travel around the world.</p>
+<div class="counter-card">
+<div class="counter-label" data-t="total">◉ &nbsp; Total participants</div>
+<div class="count" id="count">—</div>
+<div class="live"><span class="dot"></span><span data-t="live">Live counter</span></div>
+<button id="joinBtn" type="button" data-t="join">JOIN THE EXPERIMENT &nbsp; ›</button>
+<a class="share" id="shareBtn" href="#" target="_blank" rel="noopener" data-t="share">SHARE WITH 3 PEOPLE ↗</a>
+<div class="status" id="status" role="status" aria-live="polite"></div>
 <p class="hero-note" data-t="heroNote">Free to join · Anonymous participation · No payment required</p>
-</main>
+</div>
+</div>
 </section>
-
 <section class="features" id="about">
 <div class="feature-grid">
-<article class="feature"><div class="feature-icon">◎</div><h2 data-t="globalTitle">A Global Challenge</h2><p data-t="globalText">Anyone, anywhere in the world can join for free.</p></article>
-<article class="feature"><div class="feature-icon">⌑</div><h2 data-t="anonTitle">Anonymous Participation</h2><p data-t="anonText">The website does not ask for your name, email, or phone number.</p></article>
-<article class="feature"><div class="feature-icon">✓</div><h2 data-t="transparentTitle">Clear &amp; Transparent</h2><p data-t="transparentText">The counter shows registrations, not verified individual people.</p></article>
-<article class="feature"><div class="feature-icon">♡</div><h2 data-t="supportTitle">Optional Support</h2><p data-t="supportText">Support options are not available in this version. No payment is requested.</p></article>
+<article class="feature"><div class="feature-icon">✧</div><h2 data-t="globalTitle">A Global Challenge</h2><p data-t="globalText">Anyone, anywhere in the world can join this free community experiment.</p></article>
+<article class="feature"><div class="feature-icon">◈</div><h2 data-t="anonTitle">Anonymous Participation</h2><p data-t="anonText">The website does not ask for your name, email address, or phone number.</p></article>
+<article class="feature"><div class="feature-icon">◎</div><h2 data-t="transparentTitle">Clear &amp; Transparent</h2><p data-t="transparentText">The rules are public. The counter shows registrations, not verified individual people.</p></article>
+<article class="feature"><div class="feature-icon">◇</div><h2 data-t="supportTitle">Optional Support</h2><p data-t="supportText">Support options are not available in this version. Joining is free and no payment is requested.</p></article>
 </div>
 </section>
-
 <section class="details" id="rules">
 <div class="details-inner">
 <h2 data-t="aboutTitle">About the experiment</h2>
-<p>THE ONE DOLLAR MYSTERY is a free community experiment. Participation does not require payment and does not offer financial returns or investments.</p>
+<p>This is a free, voluntary global community experiment. Participation does not require payment, investment, or a promise of financial return.</p>
 <h2 data-t="participationTitle">Participation notes</h2>
 <ul>
 <li>Participation is free.</li>
-<li>The counter records anonymous app accounts, not verified people.</li>
-<li>One anonymous account is intended to create one registration record.</li>
-<li>Please do not submit personal or sensitive information.</li>
+<li>One registration per anonymous browser account.</li>
+<li>The counter displays registration records and does not verify real-world identities.</li>
+<li>No financial contribution is required or enabled in this version.</li>
 </ul>
-<details id="privacy-policy">
+<details id="privacy">
 <summary data-t="privacyTitle">PRIVACY POLICY</summary>
-<h3>Information we collect</h3>
-<p>Firebase creates an anonymous account identifier when you join. A registration record and server-generated timestamp are stored. The website does not ask for your name, email, phone number, or payment details.</p>
-<h3>How information is used</h3>
-<p>The identifier and timestamp record participation and help display total registrations.</p>
-<h3>Service providers</h3>
-<p>This website uses Google Firebase Authentication and Cloud Firestore.</p>
-<h3>Payments</h3>
-<p>This version does not accept payments. Do not submit personal or sensitive information.</p>
-<h3>Data retention</h3>
-<p>Records may remain in the database while the experiment operates. This page does not currently provide an automated deletion request.</p>
-<p>Last updated: October 2026.</p>
+<h3>What information is stored?</h3>
+<p>The site uses Firebase Anonymous Authentication to create an anonymous user ID. When you join, the database stores that ID as the document identifier and a join timestamp. The website does not ask for your name, email address, or phone number.</p>
+<h3>How is the information used?</h3>
+<p>The anonymous ID prevents the same browser account from registering more than once. The public counter displays the total number of registration records.</p>
+<h3>Data and third-party services</h3>
+<p>This website uses Google Firebase Authentication and Cloud Firestore. Those services process technical information needed to provide the registration and counter features, according to their own terms and privacy policies.</p>
+<h3>Your choice</h3>
+<p>Participation is voluntary. You can choose not to join. This version does not provide a self-service deletion option.</p>
 </details>
 </div>
 </section>
 <footer>
-<strong>◆ THE ONE DOLLAR MYSTERY</strong>
-<p>Small actions can create big mysteries.</p>
+<div class="footer-inner">
+<strong>THE ONE DOLLAR MYSTERY</strong>
+<div class="fine" data-t="footerText">Small actions can create big mysteries.<br>Thank you for being part of this journey.</div>
+</div>
+<div class="copyright">© THE ONE DOLLAR MYSTERY · A free global experiment</div>
 </footer>
-
 <script>
-const translations={
-en:{home:"Home",aboutNav:"About",rulesNav:"Rules",privacyNav:"Privacy",eyebrow:"A GLOBAL COMMUNITY EXPERIMENT",subtitle:"A simple challenge. A global community.<br>One small idea can travel around the world.",total:"◉ Total Participants",live:"Live counter",join:"JOIN THE EXPERIMENT ›",heroNote:"Free to join · Anonymous participation · No payment required",globalTitle:"A Global Challenge",globalText:"Anyone, anywhere in the world can join for free.",anonTitle:"Anonymous Participation",anonText:"The website does not ask for your name, email, or phone number.",transparentTitle:"Clear &amp; Transparent",transparentText:"The counter shows registrations, not verified individual people.",supportTitle:"Optional Support",supportText:"Support options are not available in this version. No payment is requested.",aboutTitle:"About the experiment",participationTitle:"Participation notes",privacyTitle:"PRIVACY POLICY"},
-fa:{home:"خانه",aboutNav:"درباره",rulesNav:"قوانین",privacyNav:"حریم خصوصی",eyebrow:"یک آزمایش اجتماعی جهانی",subtitle:"یک چالش ساده؛ یک جامعه جهانی.<br>یک ایده کوچک می‌تواند دور دنیا بچرخد.",total:"◉ تعداد شرکت‌کنندگان",live:"شمارنده زنده",join:"شرکت می‌کنم ›",heroNote:"شرکت رایگان · مشارکت ناشناس · بدون پرداخت",globalTitle:"یک چالش جهانی",globalText:"هر کسی در هر جای دنیا می‌تواند رایگان شرکت کند.",anonTitle:"مشارکت ناشناس",anonText:"وب‌سایت نام، ایمیل یا شماره تلفن نمی‌خواهد.",transparentTitle:"شفاف و روشن",transparentText:"شمارنده ثبت‌نام‌ها را نشان می‌دهد، نه افراد تأییدشده.",supportTitle:"حمایت اختیاری",supportText:"حمایت مالی در این نسخه فعال نیست و پرداختی درخواست نمی‌شود.",aboutTitle:"درباره آزمایش",participationTitle:"نکات شرکت",privacyTitle:"سیاست حریم خصوصی"},
-ar:{home:"الرئيسية",aboutNav:"حول",rulesNav:"القواعد",privacyNav:"الخصوصية",eyebrow:"تجربة مجتمعية عالمية",subtitle:"تحدٍ بسيط ومجتمع عالمي.<br>فكرة صغيرة قد تنتشر حول العالم.",total:"◉ إجمالي المشاركين",live:"عداد مباشر",join:"انضم إلى التجربة ›",heroNote:"مشاركة مجانية · لا يلزم الدفع",globalTitle:"تحدٍ عالمي",globalText:"يمكن للجميع المشاركة مجانًا.",anonTitle:"مشاركة دون اسم",anonText:"لا يطلب الموقع الاسم أو البريد أو الهاتف.",transparentTitle:"وضوح وشفافية",transparentText:"يعرض العداد التسجيلات وليس الأشخاص المؤكدين.",supportTitle:"دعم اختياري",supportText:"الدعم غير متاح في هذه النسخة ولا يُطلب أي دفع.",aboutTitle:"حول التجربة",participationTitle:"ملاحظات المشاركة",privacyTitle:"سياسة الخصوصية"},
-ja:{home:"ホーム",aboutNav:"概要",rulesNav:"ルール",privacyNav:"プライバシー",eyebrow:"世界規模のコミュニティ実験",subtitle:"シンプルな挑戦、世界のコミュニティ。<br>小さなアイデアが世界に広がるかもしれません。",total:"◉ 参加登録数",live:"リアルタイムカウンター",join:"実験に参加する ›",heroNote:"参加無料・支払い不要",globalTitle:"世界規模の挑戦",globalText:"世界中の誰でも無料で参加できます。",anonTitle:"匿名での参加",anonText:"氏名、メール、電話番号は求めません。",transparentTitle:"明確で透明",transparentText:"カウンターは登録数を示し、確認済みの人数ではありません。",supportTitle:"任意の支援",supportText:"この版では支援機能はなく、支払いも求めません。",aboutTitle:"実験について",participationTitle:"参加に関する注意",privacyTitle:"プライバシーポリシー"},
-fr:{home:"Accueil",aboutNav:"À propos",rulesNav:"Règles",privacyNav:"Confidentialité",eyebrow:"UNE EXPÉRIENCE MONDIALE",subtitle:"Un défi simple. Une communauté mondiale.<br>Une petite idée peut faire le tour du monde.",total:"◉ Participants",live:"Compteur en direct",join:"PARTICIPER ›",heroNote:"Participation gratuite · Aucun paiement requis",globalTitle:"Un défi mondial",globalText:"Tout le monde peut participer gratuitement.",anonTitle:"Participation anonyme",anonText:"Le site ne demande ni nom, ni e-mail, ni téléphone.",transparentTitle:"Clair et transparent",transparentText:"Le compteur indique les inscriptions, pas des personnes vérifiées.",supportTitle:"Soutien facultatif",supportText:"Le soutien n’est pas disponible dans cette version. Aucun paiement n’est demandé.",aboutTitle:"À propos",participationTitle:"Notes de participation",privacyTitle:"POLITIQUE DE CONFIDENTIALITÉ"},
-it:{home:"Home",aboutNav:"Informazioni",rulesNav:"Regole",privacyNav:"Privacy",eyebrow:"UN ESPERIMENTO GLOBALE",subtitle:"Una sfida semplice. Una comunità globale.<br>Una piccola idea può fare il giro del mondo.",total:"◉ Partecipanti totali",live:"Contatore in tempo reale",join:"PARTECIPA ›",heroNote:"Partecipazione gratuita · Nessun pagamento",globalTitle:"Una sfida globale",globalText:"Chiunque può partecipare gratuitamente.",anonTitle:"Partecipazione anonima",anonText:"Il sito non chiede nome, e-mail o telefono.",transparentTitle:"Chiaro e trasparente",transparentText:"Il contatore mostra le registrazioni, non persone verificate.",supportTitle:"Supporto facoltativo",supportText:"Il supporto non è disponibile in questa versione. Non è richiesto alcun pagamento.",aboutTitle:"Informazioni",participationTitle:"Note sulla partecipazione",privacyTitle:"INFORMATIVA SULLA PRIVACY"}
+const T={
+en:{home:"Home",aboutNav:"About",rulesNav:"Rules",privacyNav:"Privacy",eyebrow:"A GLOBAL COMMUNITY EXPERIMENT",subtitle:"A simple challenge. A global community.<br>A small idea can travel around the world.",total:"◉ &nbsp; Total participants",live:"Live counter",join:"JOIN THE EXPERIMENT &nbsp; ›",share:"SHARE WITH 3 PEOPLE ↗",heroNote:"Free to join · Anonymous participation · No payment required",globalTitle:"A Global Challenge",globalText:"Anyone, anywhere in the world can join this free community experiment.",anonTitle:"Anonymous Participation",anonText:"The website does not ask for your name, email address, or phone number.",transparentTitle:"Clear &amp; Transparent",transparentText:"The rules are public. The counter shows registrations, not verified individual people.",supportTitle:"Optional Support",supportText:"Support options are not available in this version. Joining is free and no payment is requested.",aboutTitle:"About the experiment",participationTitle:"Participation notes",privacyTitle:"PRIVACY POLICY",footerText:"Small actions can create big mysteries.<br>Thank you for being part of this journey."},
+fa:{home:"خانه",aboutNav:"درباره",rulesNav:"قوانین",privacyNav:"حریم خصوصی",eyebrow:"یک آزمایش اجتماعی جهانی",subtitle:"یک چالش ساده؛ یک جامعه جهانی.<br>یک ایده کوچک می‌تواند دور دنیا بچرخد.",total:"◉ &nbsp; تعداد کل شرکت‌کنندگان",live:"شمارنده زنده",join:"شرکت می‌کنم &nbsp; ›",share:"دعوت از ۳ نفر ↗",heroNote:"شرکت رایگان · مشارکت ناشناس · بدون نیاز به پرداخت",globalTitle:"یک چالش جهانی",globalText:"هر کسی، در هر جای دنیا، می‌تواند رایگان در این آزمایش اجتماعی شرکت کند.",anonTitle:"مشارکت ناشناس",anonText:"وب‌سایت نام، ایمیل یا شماره تلفن شما را درخواست نمی‌کند.",transparentTitle:"شفاف و روشن",transparentText:"قوانین عمومی هستند. شمارنده تعداد ثبت‌نام‌ها را نشان می‌دهد، نه افراد تأییدشده را.",supportTitle:"حمایت اختیاری",supportText:"در این نسخه امکان حمایت مالی فعال نیست. شرکت رایگان است و هیچ پرداختی درخواست نمی‌شود.",aboutTitle:"درباره آزمایش",participationTitle:"نکات شرکت در طرح",privacyTitle:"سیاست حریم خصوصی",footerText:"کارهای کوچک می‌توانند رازهای بزرگی بسازند.<br>ممنون که همراه این مسیر هستید."},
+ar:{home:"الرئيسية",aboutNav:"حول المبادرة",rulesNav:"القواعد",privacyNav:"الخصوصية",eyebrow:"تجربة مجتمعية عالمية",subtitle:"تحدٍ بسيط ومجتمع عالمي.<br>فكرة صغيرة يمكن أن تنتشر حول العالم.",total:"◉ &nbsp; إجمالي المشاركين",live:"عداد مباشر",join:"انضم إلى التجربة ›",share:"ادعُ 3 أشخاص ↗",heroNote:"المشاركة مجانية · دون اسم ظاهر · لا يلزم الدفع",globalTitle:"تحدٍ عالمي",globalText:"يمكن لأي شخص في أي مكان المشاركة مجانًا في هذه التجربة المجتمعية.",anonTitle:"مشاركة دون اسم",anonText:"لا يطلب الموقع اسمك أو بريدك الإلكتروني أو رقم هاتفك.",transparentTitle:"وضوح وشفافية",transparentText:"القواعد متاحة للجميع. يعرض العداد التسجيلات، وليس أشخاصًا تم التحقق منهم.",supportTitle:"دعم اختياري",supportText:"خيارات الدعم غير متاحة في هذه النسخة. المشاركة مجانية ولا يُطلب أي دفع.",aboutTitle:"حول التجربة",participationTitle:"ملاحظات المشاركة",privacyTitle:"سياسة الخصوصية",footerText:"قد تصنع الخطوات الصغيرة ألغازًا كبيرة.<br>شكرًا لمشاركتك في هذه الرحلة."},
+ja:{home:"ホーム",aboutNav:"概要",rulesNav:"ルール",privacyNav:"プライバシー",eyebrow:"世界規模のコミュニティ実験",subtitle:"シンプルな挑戦、世界のコミュニティ。<br>小さなアイデアが世界中に広がるかもしれません。",total:"◉ &nbsp; 参加登録数",live:"リアルタイムカウンター",join:"実験に参加する ›",share:"3人にシェア ↗",heroNote:"参加無料 · 匿名で参加 · 支払い不要",globalTitle:"世界規模の挑戦",globalText:"世界中の誰でも無料でこのコミュニティ実験に参加できます。",anonTitle:"匿名での参加",anonText:"氏名、メールアドレス、電話番号は求めません。",transparentTitle:"明確で透明",transparentText:"ルールは公開されています。カウンターは登録数を示し、本人確認済みの人数ではありません。",supportTitle:"任意の支援",supportText:"このバージョンでは支援機能は利用できません。参加は無料で、支払いは求めません。",aboutTitle:"実験について",participationTitle:"参加に関する注意",privacyTitle:"プライバシーポリシー",footerText:"小さな行動が大きな謎を生むことがあります。<br>参加してくれてありがとうございます。"},
+fr:{home:"Accueil",aboutNav:"À propos",rulesNav:"Règles",privacyNav:"Confidentialité",eyebrow:"UNE EXPÉRIENCE COMMUNAUTAIRE MONDIALE",subtitle:"Un défi simple. Une communauté mondiale.<br>Une petite idée peut faire le tour du monde.",total:"◉ &nbsp; Nombre de participants",live:"Compteur en direct",join:"PARTICIPER À L’EXPÉRIENCE ›",share:"INVITER 3 PERSONNES ↗",heroNote:"Participation gratuite · Anonyme · Aucun paiement requis",globalTitle:"Un défi mondial",globalText:"Tout le monde peut participer gratuitement à cette expérience communautaire.",anonTitle:"Participation anonyme",anonText:"Le site ne demande ni nom, ni adresse e-mail, ni numéro de téléphone.",transparentTitle:"Clair et transparent",transparentText:"Les règles sont publiques. Le compteur indique les inscriptions, pas des personnes vérifiées.",supportTitle:"Soutien facultatif",supportText:"Les options de soutien ne sont pas disponibles dans cette version. La participation est gratuite et aucun paiement n’est demandé.",aboutTitle:"À propos de l’expérience",participationTitle:"Notes de participation",privacyTitle:"POLITIQUE DE CONFIDENTIALITÉ",footerText:"De petits gestes peuvent créer de grands mystères.<br>Merci de faire partie de cette aventure."},
+it:{home:"Home",aboutNav:"Informazioni",rulesNav:"Regole",privacyNav:"Privacy",eyebrow:"UN ESPERIMENTO DI COMUNITÀ GLOBALE",subtitle:"Una sfida semplice. Una comunità globale.<br>Una piccola idea può fare il giro del mondo.",total:"◉ &nbsp; Partecipanti totali",live:"Contatore in tempo reale",join:"PARTECIPA ALL’ESPERIMENTO ›",share:"INVITA 3 PERSONE ↗",heroNote:"Partecipazione gratuita · Anonima · Nessun pagamento richiesto",globalTitle:"Una sfida globale",globalText:"Chiunque può partecipare gratuitamente a questo esperimento comunitario.",anonTitle:"Partecipazione anonima",anonText:"Il sito non chiede nome, e-mail o numero di telefono.",transparentTitle:"Chiaro e trasparente",transparentText:"Le regole sono pubbliche. Il contatore mostra le registrazioni, non persone verificate.",supportTitle:"Supporto facoltativo",supportText:"Le opzioni di supporto non sono disponibili in questa versione. Partecipare è gratuito e non viene richiesto alcun pagamento.",aboutTitle:"Informazioni sull’esperimento",participationTitle:"Note sulla partecipazione",privacyTitle:"INFORMATIVA SULLA PRIVACY",footerText:"Piccole azioni possono creare grandi misteri.<br>Grazie per far parte di questo percorso."}
 };
-const languageSelect=document.getElementById("languageSelect");
-languageSelect.addEventListener("change",()=>{
- const lang=languageSelect.value;
- const t=translations[lang];
- document.documentElement.lang=lang;
- document.documentElement.dir=(lang==="fa"||lang==="ar")?"rtl":"ltr";
- document.querySelectorAll("[data-t]").forEach(el=>{
-  if(t[el.dataset.t]) el.innerHTML=t[el.dataset.t];
- });
-});
+const langSelect=document.getElementById('languageSelect');
+function setLang(lang){
+const t=T[lang]||T.en;
+document.documentElement.lang=lang;
+document.documentElement.dir=(lang==='fa'||lang==='ar')?'rtl':'ltr';
+document.querySelectorAll('[data-t]').forEach(el=>{const v=t[el.dataset.t];if(v!==undefined)el.innerHTML=v});
+window.siteText={
+registering:({fa:'در حال ثبت مشارکت شما…',ar:'جارٍ تسجيل مشاركتك…',ja:'参加を登録しています…',fr:'Enregistrement de votre participation…',it:'Registrazione della partecipazione…',en:'Registering your participation…'})[lang],
+already:({fa:'شما قبلاً ثبت‌نام کرده‌اید. ممنون!',ar:'لقد سجلت بالفعل. شكرًا لك!',ja:'登録済みです。ありがとうございます！',fr:'Vous êtes déjà inscrit. Merci !',it:'Sei già registrato. Grazie!',en:'You are already registered. Thanks!'})[lang],
+joined:({fa:'ثبت‌نام انجام شد! این طرح را با سه نفر به اشتراک بگذار.',ar:'تم تسجيلك! شارك التجربة مع ثلاثة أشخاص.',ja:'登録されました！3人に共有してください。',fr:'Inscription réussie ! Partagez avec trois personnes.',it:'Registrazione completata! Condividi con tre persone.',en:'You are in! Share the experiment with three people.'})[lang],
+error:({fa:'اتصال برقرار نشد؛ تنظیمات Firebase را بررسی کن.',ar:'تعذر الاتصال؛ تحقق من إعدادات Firebase.',ja:'接続できません。Firebase の設定を確認してください。',fr:'Connexion impossible. Vérifiez Firebase.',it:'Connessione impossibile. Controlla Firebase.',en:'Connection failed. Check the Firebase setup.'})[lang]
+};
+langSelect.value=lang;
+}
+langSelect.addEventListener('change',()=>setLang(langSelect.value));
+setLang('en');
 </script>
-
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import {getAuth,signInAnonymously} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-import {getFirestore,doc,getDoc,setDoc,serverTimestamp,collection,getCountFromServer} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-
-const firebaseConfig={
- apiKey:"AIzaSyB2HA4ajBflYsWxIV-8zpyYtX_5AgXKNsk",
- authDomain:"one-dollar-mystery.firebaseapp.com",
- projectId:"one-dollar-mystery",
- storageBucket:"one-dollar-mystery.firebasestorage.app",
- messagingSenderId:"609635738492",
- appId:"1:609635738492:web:c6691f648cf1660ca1faf9",
- measurementId:"G-4FJTDZ9MY2"
-};
-
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getFirestore(app);
-const countEl=document.getElementById("count");
-const statusEl=document.getElementById("status");
-const joinBtn=document.getElementById("joinBtn");
-const shareBtn=document.getElementById("shareBtn");
-
-async function refreshCount(){
- const result=await getCountFromServer(collection(db,"participants"));
- countEl.textContent=result.data().count.toLocaleString();
-}
-
-shareBtn.href="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(location.href);
-
-if(navigator.share){
- shareBtn.addEventListener("click",async event=>{
-  event.preventDefault();
-  try{
-   await navigator.share({
-    title:"THE ONE DOLLAR MYSTERY",
-    text:"Join this free global experiment and invite three people.",
-    url:location.href
-   });
-  }catch(_){}
- });
-}
-
-joinBtn.addEventListener("click",async()=>{
- joinBtn.disabled=true;
- statusEl.textContent="Registering your participation…";
- try{
-  const credential=await signInAnonymously(auth);
-  const participantRef=doc(db,"participants",credential.user.uid);
-  const existing=await getDoc(participantRef);
-  if(existing.exists()){
-   statusEl.textContent="You're already registered. Thanks for joining!";
-  }else{
-   await setDoc(participantRef,{joinedAt:serverTimestamp()});
-   statusEl.textContent="You're in! Share the experiment with three people.";
-  }
-  await refreshCount();
- }catch(error){
-  console.error(error);
-  statusEl.textContent="Connection failed. Check the Firebase setup.";
- }finally{
-  joinBtn.disabled=false;
- }
-});
-
-refreshCount().catch(error=>{
- console.error(error);
- countEl.textContent="—";
- statusEl.textContent="Setup needed: check the Firebase connection.";
-});
-</script>
-</body>
-</html>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp, collection, getCountFromServer } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+const firebaseConfig={apiKey:"AIzaSyB2HA4ajBflYsWxIV-8zpyYtX_5AgXKNsk",authDomain:"one-dollar-mystery.firebaseapp.com",projectId:"one-dollar-mystery",storageBucket:"one-dollar-mystery.firebasestorage.app",messagingSenderId:"609635738492",appId:"1:609635738492:web:c6691f648cf1660ca1faf9",measurementId:"G-4FJTDZ9MY2"};
+const countEl=document.getE
