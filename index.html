@@ -201,7 +201,7 @@ function showStatus(message){ $('status').textContent=message; }
 function updateProgress(count){ $('count').textContent=String(count); $('progressFill').style.width=Math.min(100, count/TARGET*100)+'%'; $('targetText').textContent=`${t('target')} (${Math.min(count,TARGET)}/${TARGET})`; }
 async function refreshCount(){
  try { const snap=await getCountFromServer(collection(db,'participants')); updateProgress(snap.data().count); }
- catch(err){ console.error('Count error:',err); $('count').textContent='—'; showStatus('Counter unavailable. Please refresh and try again.'); }
+ catch(err){ console.error('Count error:',err); $('count').textContent='—'; showStatus(`Counter unavailable [${err.code || err.message || 'unknown error'}]. Please refresh and try again.`); }
 }
 function showMembership(data){
  $('welcomeBox').hidden=false; $('welcomeTitle').textContent=t('members');
@@ -222,9 +222,9 @@ $('joinBtn').addEventListener('click', async()=>{
   const user=auth.currentUser || (await signInAnonymously(auth)).user;
   const ref=doc(db,'participants',user.uid); const existing=await getDoc(ref);
   if(existing.exists()){ showMembership(existing.data()); showStatus(t('already')); }
-  else { await setDoc(ref,{joinedAt:serverTimestamp()}); joined=true; $('welcomeBox').hidden=false; $('welcomeTitle').textContent=t('welcome'); $('welcomeDetails').textContent=t('joined'); $('joinedTime').textContent=`${t('joinedAt')}: ${new Date().toLocaleString()}`; showStatus(t('joined')); }
+  else { await setDoc(ref,{joinedAt:serverTimestamp()}); $('welcomeBox').hidden=false; $('welcomeTitle').textContent=t('welcome'); $('welcomeDetails').textContent=t('joined'); $('joinedTime').textContent=`${t('joinedAt')}: ${new Date().toLocaleString()}`; showStatus(t('joined')); }
   await refreshCount();
- } catch(err){ console.error('Join error:',err); showStatus(t('failed')); }
+ } catch(err){ console.error('Join error:',err); showStatus(`${t('failed')} [${err.code || err.message || 'unknown error'}]`); }
  finally { btn.disabled=false; }
 });
 $('shareBtn').addEventListener('click', async e=>{
