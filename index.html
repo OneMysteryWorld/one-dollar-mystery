@@ -43,6 +43,18 @@ button:disabled{opacity:.6}
 .ico{flex:0 0 48px;height:48px;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle,#087dff,#092e77);border:1px solid #00aaff;color:white;font-size:23px;box-shadow:0 0 20px #008dff55}
 .card h2{font-size:14px;margin:7px 0 10px}
 .card p,.details p,.details li{font-size:12px;color:#c3d8f3;line-height:1.65;margin:0}
+.survey{max-width:900px;margin:28px auto;padding:24px 18px;border:1px solid #087fce;border-radius:16px;background:linear-gradient(145deg,#08234a,#031329);box-shadow:0 0 28px #007dff18}
+.survey h2{margin:0 0 10px;font-size:clamp(20px,4vw,28px);color:#27d8ff}
+.survey-intro{color:#c3d8f3;line-height:1.7;font-size:14px}
+.survey-options{display:grid;gap:10px;margin:18px 0}
+.survey-option{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid #1766a4;border-radius:11px;background:#04162e;cursor:pointer}
+.survey-option:has(input:checked){border-color:#27d8ff;background:#063366;box-shadow:0 0 15px #078cff22}
+.survey-option input{accent-color:#08bfff;width:18px;height:18px;flex:0 0 auto}
+.survey-option span{line-height:1.5}
+#otherIdea{width:100%;min-height:80px;padding:12px;border-radius:10px;border:1px solid #1766a4;background:#031329;color:white;font:inherit;resize:vertical}
+#surveySave{max-width:300px}
+#surveyStatus{min-height:20px;text-align:center;color:#bdeaff;font-size:13px;margin-top:12px}
+[dir="rtl"] .survey-option{direction:rtl}
 .details{padding:35px max(calc((100% - 1160px)/2),22px);display:grid;grid-template-columns:1fr 1fr;gap:35px;background:#030b1b}
 .details h2{font-size:19px;margin:0 0 14px}
 .details ul{padding-left:18px}
@@ -123,6 +135,19 @@ footer{padding:20px 16px}
 <div class="note" data-t="note">Free to join　·　Anonymous participation　·　No payment required</div>
 </section>
 
+<section class="survey" id="mysterySurvey" aria-labelledby="surveyTitle">
+<h2 id="surveyTitle">If you had one dollar and could share one idea with the whole world…</h2>
+<p class="survey-intro" id="surveyIntro">Which idea would you choose?</p>
+<div class="survey-options" role="radiogroup" aria-labelledby="surveyTitle">
+<label class="survey-option"><input type="radio" name="mysteryChoice" value="A"><span id="choiceA">A) Helping others</span></label>
+<label class="survey-option"><input type="radio" name="mysteryChoice" value="B"><span id="choiceB">B) Building a global idea</span></label>
+<label class="survey-option"><input type="radio" name="mysteryChoice" value="C"><span id="choiceC">C) Free education</span></label>
+<label class="survey-option"><input type="radio" name="mysteryChoice" value="D"><span id="choiceD">D) My own idea (other)</span></label>
+</div>
+<button id="surveySave" type="button">Submit my answer</button>
+<div id="surveyStatus" role="status" aria-live="polite"></div>
+</section>
+
 <section class="features" id="about">
 <article class="card"><div class="ico">◎</div><div><h2 data-t="globalTitle">A Global Challenge</h2><p data-t="globalText">Anyone, anywhere in the world can join this free community experiment.</p></div></article>
 <article class="card"><div class="ico">◈</div><div><h2 data-t="anonTitle">Anonymous Participation</h2><p data-t="anonText">The website does not ask for your name, email address, or phone number.</p></div></article>
@@ -191,18 +216,58 @@ function applyLanguage(lang){
  document.documentElement.dir = currentLang === 'fa' || currentLang === 'ar' ? 'rtl' : 'ltr';
  document.querySelectorAll('[data-t]').forEach(el=>{const val=t(el.dataset.t); if(val && val!==el.dataset.t) el.innerHTML=val;});
  $('progressText').textContent=t('progress'); $('targetText').textContent=t('target');
+ applySurveyLanguage();
 }
 $('languageSelect').addEventListener('change', e=>applyLanguage(e.target.value));
+function applySurveyLanguage(){
+ const fa = currentLang === 'fa';
+ $('surveyTitle').textContent = fa ? 'اگر یک دلار داشته باشی و بتوانی یک ایده را به تمام دنیا منتقل کنی…' : 'If you had one dollar and could share one idea with the whole world…';
+ $('surveyIntro').textContent = fa ? 'کدام ایده را انتخاب می‌کنی؟' : 'Which idea would you choose?';
+ $('choiceA').textContent = fa ? 'A) کمک به دیگران' : 'A) Helping others';
+ $('choiceB').textContent = fa ? 'B) ساختن یک ایدهٔ جهانی' : 'B) Building a global idea';
+ $('choiceC').textContent = fa ? 'C) آموزش رایگان' : 'C) Free education';
+ $('choiceD').textContent = fa ? 'D) انتخاب خودم (گزینهٔ دیگر)' : 'D) My own idea (other)';
+ $('surveySave').textContent = fa ? 'ثبت پاسخ من' : 'Submit my answer';
+}
 applyLanguage('en');
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+let savedSurveyAnswer = null;
+document.querySelectorAll('input[name="mysteryChoice"]').forEach(input=>input.addEventListener('change',()=>{
+}));
+function showSurveyAnswer(data){
+ savedSurveyAnswer = data;
+ const selected = document.querySelector(`input[name="mysteryChoice"][value="${data.answer}"]`);
+ if(selected) selected.checked = true;
+ document.querySelectorAll('input[name="mysteryChoice"]').forEach(input=>input.disabled=true);
+ $('surveySave').disabled=true;
+ $('surveyStatus').textContent = currentLang === 'fa' ? 'پاسخ شما قبلاً ثبت شده است. ممنون!' : 'Your answer has already been saved. Thank you!';
+}
 function showStatus(message){ $('status').textContent=message; }
 function updateProgress(count){ $('count').textContent=String(count); $('progressFill').style.width=Math.min(100, count/TARGET*100)+'%'; $('targetText').textContent=`${t('target')} (${Math.min(count,TARGET)}/${TARGET})`; }
 async function refreshCount(){
- try { const snap=await getCountFromServer(collection(db,'participants')); updateProgress(snap.data().count); }
- catch(err){ console.error('Count error:',err); $('count').textContent='—'; showStatus(`Counter unavailable [${err.code || err.message || 'unknown error'}]. Please refresh and try again.`); }
+ try {
+  const snap=await getCountFromServer(collection(db,'participants'));
+  updateProgress(snap.data().count);
+ } catch(err){
+  console.error('Count error:',err);
+  $('count').textContent='—';
+  showStatus(`Counter unavailable [${err.code || err.message || 'unknown error'}]. Please refresh and try again.`);
+ }
 }
+// Refresh the aggregate count periodically so visitors see new registrations without reloading.
+// This uses an aggregate count query rather than downloading every participant document.
+let countRefreshTimer = null;
+function startCountRefresh(){
+ if(countRefreshTimer !== null) clearInterval(countRefreshTimer);
+ countRefreshTimer = setInterval(() => {
+  if(document.visibilityState === 'visible') refreshCount();
+ }, 30000);
+}
+document.addEventListener('visibilitychange', () => {
+ if(document.visibilityState === 'visible') refreshCount();
+});
 function showMembership(data){
  $('welcomeBox').hidden=false; $('welcomeTitle').textContent=t('members');
  const d=data?.joinedAt?.toDate ? data.joinedAt.toDate() : null;
@@ -211,10 +276,18 @@ function showMembership(data){
 }
 async function start(){
  try {
-  const cred=await signInAnonymously(auth); const ref=doc(db,'participants',cred.user.uid); const existing=await getDoc(ref);
-  if(existing.exists()){ showMembership(existing.data()); }
+  const user = auth.currentUser || (await signInAnonymously(auth)).user;
+  const ref=doc(db,'participants',user.uid);
+  const existing=await getDoc(ref);
+  if(existing.exists()) showMembership(existing.data());
+  const answerSnap=await getDoc(doc(db,'answers',user.uid));
+  if(answerSnap.exists()) showSurveyAnswer(answerSnap.data());
   await refreshCount();
- } catch(err){ console.error('Firebase initialization/auth error:',err); showStatus(`Connection error [${err.code || err.message || 'unknown error'}]. Check Firebase settings.`); }
+  startCountRefresh();
+ } catch(err){
+  console.error('Firebase initialization/auth error:',err);
+  showStatus(`Connection error [${err.code || err.message || 'unknown error'}]. Check Firebase settings.`);
+ }
 }
 $('joinBtn').addEventListener('click', async()=>{
  const btn=$('joinBtn'); btn.disabled=true; showStatus(t('loading'));
@@ -233,6 +306,28 @@ $('shareBtn').addEventListener('click', async e=>{
  else if(navigator.clipboard && window.isSecureContext){ await navigator.clipboard.writeText(text); showStatus(t('copyOk')); }
  else { const area=document.createElement('textarea'); area.value=text; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove(); showStatus(t('copyOk')); } }
  catch(err){ if(err.name!=='AbortError') showStatus('Please copy the website link from your browser.'); }
+});
+$('surveySave').addEventListener('click', async()=>{
+ const btn=$('surveySave');
+ const selected=document.querySelector('input[name="mysteryChoice"]:checked');
+ const fa=currentLang==='fa';
+ if(!selected){ $('surveyStatus').textContent=fa?'لطفاً یک گزینه انتخاب کن.':'Please choose an option first.'; return; }
+ btn.disabled=true; $('surveyStatus').textContent=fa?'در حال ثبت پاسخ…':'Saving your answer…';
+ try{
+  const user=auth.currentUser || (await signInAnonymously(auth)).user;
+  const answerRef=doc(db,'answers',user.uid);
+  const existing=await getDoc(answerRef);
+  if(existing.exists()) showSurveyAnswer(existing.data());
+  else {
+   await setDoc(answerRef,{answer:selected.value,answeredAt:serverTimestamp()});
+   showSurveyAnswer({answer:selected.value});
+   $('surveyStatus').textContent=fa?'پاسخت با موفقیت ثبت شد. ممنون!':'Your answer was saved. Thank you!';
+  }
+ }catch(err){
+  console.error('Survey save error:',err);
+  $('surveyStatus').textContent=(fa?'ثبت پاسخ انجام نشد. دوباره تلاش کن.':'Could not save your answer. Please try again.')+' ['+(err.code||'unknown error')+']';
+  btn.disabled=false;
+ }
 });
 start();
 </script>
